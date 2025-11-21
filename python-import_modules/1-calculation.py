@@ -9,5 +9,5 @@ if __name__ == "__main__":
    print("{:d} - {:d} = {:d}".format(a, b, sub))
    mul = mul(a, b)
    print("{:d} * {:d} = {:d}".format(a, b, mul))
-   div = mul(a, b)
+   div = div(a, b)
    print("{:d} / {:d} = {:d}".format(a, b, div))
