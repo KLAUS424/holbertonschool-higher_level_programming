@@ -6,7 +6,7 @@ def add_tuple(tuple_a=(), tuple_b=()):
             return (t[0], t[1])
         elif len(t) == 1:
             return (t[0], 0)
-        else: 
+        else:
             return (0, 0)
     a1, a2 = get_first_two(tuple_a)
     b1, b2 = get_first_two(tuple_b)
