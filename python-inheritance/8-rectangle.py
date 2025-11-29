@@ -24,7 +24,7 @@ class Rectangle(BaseGeometry):
             width (int): The width of the rectangle.
             height (int): The height of the rectangle.
 
-        The width and height are validated using integer_validator 
+        The width and height are validated using integer_validator
         and stored as private instance attributes.
         """
         # Validate and set width (private attribute)
