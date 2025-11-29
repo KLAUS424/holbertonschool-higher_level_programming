@@ -128,6 +128,6 @@ class Rectangle:
 
         # Construct the representation line by line
         line = "#" * self.__width
-        
+
         # Join lines with newline character, ensuring no trailing newline
         return '\n'.join([line for i in range(self.__height)])
