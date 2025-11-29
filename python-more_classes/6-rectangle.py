@@ -12,7 +12,8 @@ class Rectangle:
     Represents a rectangle figure and tracks the number of instances.
 
     Public class attribute:
-        number_of_instances (int): Tracks the total count of active Rectangle instances.
+        number_of_instances (int): Tracks the total count of active Rectangle
+            instances.
     """
     number_of_instances = 0
 
