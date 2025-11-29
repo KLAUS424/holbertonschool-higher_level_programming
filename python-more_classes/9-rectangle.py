@@ -186,7 +186,7 @@ class Rectangle:
     def __repr__(self):
         """
         Returns the official string representation of the Rectangle instance,
-        allowing recreation of the object using eval().
+        allowing recreation of the object by using eval().
 
         Returns:
             str: String representation: "Rectangle(width, height)"
