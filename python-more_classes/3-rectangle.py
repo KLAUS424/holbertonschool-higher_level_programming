@@ -5,7 +5,8 @@
 This module provides the Rectangle class, which is defined by private
 instance attributes 'width' and 'height'. It includes properties for
 validation, methods for calculation (area/perimeter), and string
-representation methods (__str__ and __repr__).
+representation method (__str__). The __repr__ method is intentionally
+omitted to allow Python to return the default object representation.
 """
 
 
@@ -125,20 +126,8 @@ class Rectangle:
         if self.__width == 0 or self.__height == 0:
             return ""
 
-        # Hər sətir üçün genişlik qədər '#' təkrarlanır
+        # Construct the representation line by line
         line = "#" * self.__width
-
-        # Hündürlük qədər sətirləri birləşdirir
-        # Hər sətir yeni sətir xarakteri ilə ayrılır, lakin sonda yeni sətir olmur
+        
+        # Join lines with newline character, ensuring no trailing newline
         return '\n'.join([line for i in range(self.__height)])
-
-    def __repr__(self):
-        """
-        Returns the official string representation of the Rectangle instance.
-
-        The string can be used to recreate the object using eval().
-
-        Returns:
-            str: String representation: "Rectangle(width, height)"
-        """
-        return "Rectangle({}, {})".format(self.__width, self.__height)
