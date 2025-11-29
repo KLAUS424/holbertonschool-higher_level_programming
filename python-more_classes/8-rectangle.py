@@ -128,7 +128,8 @@ class Rectangle:
             rect_2 (Rectangle): The second rectangle instance to compare.
 
         Raises:
-            TypeError: If either rect_1 or rect_2 is not an instance of Rectangle.
+            TypeError: If either rect_1 or rect_2 is not an instance
+                of Rectangle.
 
         Returns:
             Rectangle: rect_1 if its area is greater than or equal to rect_2's
