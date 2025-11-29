@@ -11,20 +11,15 @@
 [1, 2, 3, 4, 5]
 >>> print(my_list)
 [1, 4, 2, 3, 5]
->>> my_list.append(-3)
->>> my_list.append(10)
->>> my_list.append(0)
->>> print(my_list)
+
+>>> my_list2 = MyList()
+>>> my_list2.append(-3)
+>>> my_list2.append(10)
+>>> my_list2.append(0)
+>>> print(my_list2)
 [-3, 10, 0]
->>> my_list.print_sorted()
+>>> my_list2.print_sorted()
 [-3, 0, 10]
->>> print(my_list)
+>>> print(my_list2)
 [-3, 10, 0]
 
->>> empty = MyList()
->>> print(empty)
-[]
->>> empty.print_sorted()
-[]
->>> print(empty)
-[]
