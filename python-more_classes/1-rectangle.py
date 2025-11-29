@@ -12,7 +12,8 @@ class Rectangle:
     """
     Represents a rectangle figure.
 
-    Manages the size of the rectangle through validated width and height properties.
+    Manages the size of the rectangle through validated width and height
+       properties.
     """
 
     def __init__(self, width=0, height=0):
