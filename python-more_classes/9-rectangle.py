@@ -133,8 +133,8 @@ class Rectangle:
                 of Rectangle.
 
         Returns:
-            Rectangle: rect_1 if its area is greater than or equal to rect_2's
-                area, otherwise returns rect_2.
+            Rectangle: rect_1 if its area is greater than or equal to
+                rect_2's area, otherwise returns rect_2.
         """
         if not isinstance(rect_1, Rectangle):
             raise TypeError("rect_1 must be an instance of Rectangle")
@@ -156,7 +156,8 @@ class Rectangle:
             size (int, optional): The side length of the square. Defaults to 0.
 
         Returns:
-            Rectangle: A new instance of Rectangle where width == height == size.
+            Rectangle: A new instance of Rectangle where width == height
+                == size.
         """
         return cls(size, size)
 
