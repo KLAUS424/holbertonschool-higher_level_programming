@@ -110,7 +110,10 @@ class Rectangle:
         """
         if self.__width == 0 or self.__height == 0:
             return 0
-        return 2 * (self.__width + self.__height)#!/usr/bin/python3
+        return 2 * (self.__width + self.__height)
+    
+    
+# Sətrin sonunda Pycodestyle-ın tələb etdiyi kimi 2 boş sətir buraxıldı.#!/usr/bin/python3
 """
 2-rectangle: Module that defines a Rectangle class.
 
