@@ -1,0 +1,48 @@
+BaseGeometry = import('7-base_geometry').BaseGeometry
+bg = BaseGeometry()
+
+Test for area() method raising an exception
+
+try:
+...     bg.area()
+... except Exception as e:
+...     print("[{}] {}".format(e.class.name, e))
+[Exception] area() is not implemented
+
+Test for successful integer_validator calls
+
+bg.integer_validator("width", 100)
+bg.integer_validator("height", 1)
+bg.integer_validator("ratio", 999999)
+
+Test 1: TypeError - value is not an integer (string)
+
+try:
+...     bg.integer_validator("name", "John")
+... except Exception as e:
+...     print("[{}] {}".format(e.class.name, e))
+[TypeError] name must be an integer
+
+Test 2: TypeError - value is not an integer (float)
+
+try:
+...     bg.integer_validator("size", 10.5)
+... except Exception as e:
+...     print("[{}] {}".format(e.class.name, e))
+[TypeError] size must be an integer
+
+Test 3: ValueError - value is zero
+
+try:
+...     bg.integer_validator("age", 0)
+... except Exception as e:
+...     print("[{}] {}".format(e.class.name, e))
+[ValueError] age must be greater than 0
+
+Test 4: ValueError - value is negative
+
+try:
+...     bg.integer_validator("distance", -4)
+... except Exception as e:
+...     print("[{}] {}".format(e.class.name, e))
+[ValueError] distance must be greater than 0
