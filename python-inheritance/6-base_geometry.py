@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-6-base_geometry: Contains the BaseGeometry class with an unimplemented area() method.
+6-base_geometry: Contains the BaseGeometry class with 
+ an unimplemented area() method.
 """
 
 
