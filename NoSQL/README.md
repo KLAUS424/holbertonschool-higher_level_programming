@@ -1,1 +1,0 @@
-NOSQL - NOT ONLY SQL
