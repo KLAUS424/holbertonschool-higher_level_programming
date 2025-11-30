@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """
 Module 10-student
-Contains the updated Student class definition with selective JSON serialization.
+Contains the updated Student class definition
+ with selective JSON serialization.
 """
 
 
@@ -30,9 +31,10 @@ class Student:
         Retrieves a dictionary representation of the Student instance.
 
         Args:
-            attrs (list, optional): A list of strings specifying attribute names
-                                    to retrieve. If None or not a list of strings,
-                                    all attributes are retrieved. Defaults to None.
+            attrs (list, optional):
+              A list of strings specifying attribute names
+              to retrieve. If None or not a list of strings,
+              all attributes are retrieved. Defaults to None.
 
         Returns:
             dict: A dictionary containing the student's attributes.
