@@ -7,8 +7,10 @@ The Square class must validate its size
 using BaseGeometry's integer_validator.
 """
 
+
 # Import the Rectangle class from the previous file
 Rectangle = __import__('9-rectangle').Rectangle
+
 
 class Square(Rectangle):
     """
