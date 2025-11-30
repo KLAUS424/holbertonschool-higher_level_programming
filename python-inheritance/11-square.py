@@ -34,7 +34,8 @@ class Square(Rectangle):
 
     def __str__(self):
         """
-        Returns the square's description in the format: [Square] <width>/<height>.
+        Returns the square's description in the format:
+         [Square] <width>/<height>.
         Since width and height are equal to __size, we use that value.
         """
         return "[Square] {}/{}".format(self.__size, self.__size)
