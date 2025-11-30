@@ -7,7 +7,8 @@ Contains the Student class definition.
 
 class Student:
     """
-    Defines a student with public instance attributes: first_name, last_name, and age.
+    Defines a student with public instance attributes:
+       first_name, last_name, and age.
     """
 
     def __init__(self, first_name, last_name, age):
