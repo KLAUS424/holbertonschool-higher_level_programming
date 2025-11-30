@@ -7,7 +7,8 @@ Contains a function to generate Pascal's triangle up to n rows.
 
 def pascal_triangle(n):
     """
-    Returns a list of lists of integers representing the Pascal’s triangle of n.
+    Returns a list of lists of integers representing
+        the Pascal  triangle of n.
 
     Args:
         n (int): The number of rows of the triangle to generate.
@@ -34,10 +35,6 @@ def pascal_triangle(n):
             for j in range(1, len(previous_row)):
                 element = previous_row[j - 1] + previous_row[j]
                 current_row.append(element)
-
-
             current_row.append(1)
-
         triangle.append(current_row)
-
     return triangle
