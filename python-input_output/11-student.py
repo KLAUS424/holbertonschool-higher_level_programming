@@ -2,7 +2,7 @@
 """
 Module 11-student
 Contains the Student class definition,
-  implementing serialization (to_json) 
+  implementing serialization (to_json)
 and deserialization (reload_from_json).
 """
 
