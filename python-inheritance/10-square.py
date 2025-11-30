@@ -3,7 +3,7 @@
 Module 10-square.py
 Contains the class Square that inherits
  from Rectangle (9-rectangle.py).
-The Square class must validate its size 
+The Square class must validate its size
 using BaseGeometry's integer_validator.
 """
 
@@ -27,14 +27,6 @@ class Square(Rectangle):
             size (int): The side length of the square.
               Must be a positive integer.
         """
-        # 1. Validate 'size' using the inherited integer_validator method
-        # which checks if size is an integer and greater than 0.
         self.integer_validator("size", size)
-        # 2. Call the parent class (Rectangle) constructor.
-        # Since a square has equal sides, size is passed for both width and height.
         super().__init__(size, size)
-        # 3. Store 'size' as a private instance attribute __size
         self.__size = size
-        # Note on methods:
-        # - area(): Inherited from Rectangle, which correctly calculates size * size.
-        # - __str__(): Inherited from Rectangle, which outputs [Rectangle] size/size.
