@@ -1,38 +1,30 @@
 #!/usr/bin/python3
 """
-Python script that takes a URL as an argument,
- sends a request to the URL,
-and displays the value of the 'X-Request-Id' variable found
-in the response header.
-Uses urllib and sys packages.
+Python script that takes in a URL, sends a request to the URL
+and displays the value of the X-Request-Id variable found in
+the header of the response.
 """
+
 import urllib.request
 import sys
 
-def get_x_request_id():
-    """
-    Fetches the URL provided as the first command-line argument and prints the
-    value of the 'X-Request-Id' header from the response.
-    """
-    # Check for the required argument
+
+def main():
+    """Main function to fetch and display X-Request-Id header"""
+    # Check if URL is provided
     if len(sys.argv) < 2:
         return
-
     url = sys.argv[1]
+    # Use with statement to open URL
+    with urllib.request.urlopen(url) as response:
+        # Get the headers from the response
+        headers = response.info()
+        # Get the X-Request-Id header value
+        x_request_id = headers.get('X-Request-Id')
+        # Print the value if it exists
+        if x_request_id:
+            print(x_request_id)
 
-    try:
-        # Use a 'with' statement for resource management
-        with urllib.request.urlopen(url) as response:
-            # The header is retrieved using response.headers.get() which
-            # is case-insensitive for standard header fields.
-            x_request_id = response.headers.get('X-Request-Id')
-            if x_request_id is not None:
-                print(x_request_id)
-
-    except urllib.error.URLError as e:
-        print(f"Error accessing URL '{url}': {e.reason}", file=sys.stderr)
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}", file=sys.stderr)
 
 if __name__ == "__main__":
-    get_x_request_id()
+    main()
