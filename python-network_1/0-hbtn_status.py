@@ -1,17 +1,20 @@
 #!/usr/bin/python3
 """
-Python script that fetches a URL and displays information about the response body.
+Python script that fetches a URL and
+displays information about the response body.
 Uses the 'urllib' package and a 'with' statement.
 """
+
 import urllib.request
+
 
 def fetch_hbtn_status(url="https://intranet.hbtn.io/status"):
     """
-    Fetches the content from the given URL and prints the response body details
+    Fetches the content from the given URL and
+     prints the response body details
     in the required format.
     """
     try:
-        # Use the 'with' statement to handle the request and automatically close
         # the response object upon completion.
         with urllib.request.urlopen(url) as response:
             # Read the entire body of the response
@@ -30,6 +33,7 @@ def fetch_hbtn_status(url="https://intranet.hbtn.io/status"):
         print(f"Error fetching URL: {e.reason}")
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
+
 
 if __name__ == "__main__":
     fetch_hbtn_status()
