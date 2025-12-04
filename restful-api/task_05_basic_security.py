@@ -8,12 +8,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_httpauth import HTTPBasicAuth
 from flask_jwt_extended import (
     JWTManager, create_access_token, jwt_required,
-    get_jwt_identity, create_refresh_token
+    get_jwt_identity, get_jwt
 )
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your-secret-key-here'  # Change this in production!
-app.config['JWT_SECRET_KEY'] = 'super-secret-jwt-key'  # Change this in production!
+app.config['SECRET_KEY'] = 'your-secret-key-here'
+app.config['JWT_SECRET_KEY'] = 'super-secret-jwt-key'
 
 # Initialize authentication modules
 basic_auth = HTTPBasicAuth()
@@ -112,7 +112,7 @@ def login():
     # Create JWT token with identity and additional claims
     access_token = create_access_token(
         identity=username,
-        additional_claims={"role": user['role"]}
+        additional_claims={"role": user['role']}
     )
     return jsonify({
         "access_token": access_token
@@ -132,7 +132,8 @@ def admin_only():
     """Admin-only endpoint with role-based access control"""
     current_user = get_jwt_identity()
     # Get user role from token claims
-    current_user_role = get_jwt().get('role', None)
+    jwt_data = get_jwt()
+    current_user_role = jwt_data.get('role', None)
     # Check if user is admin
     if current_user_role != 'admin':
         return jsonify({"error": "Admin access required"}), 403
@@ -140,4 +141,4 @@ def admin_only():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=False)
