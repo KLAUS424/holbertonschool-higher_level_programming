@@ -7,21 +7,8 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-# In-memory storage for users
-users = {
-    "jane": {
-        "username": "jane",
-        "name": "Jane",
-        "age": 28,
-        "city": "Los Angeles"
-    },
-    "john": {
-        "username": "john",
-        "name": "John",
-        "age": 30,
-        "city": "New York"
-    }
-}
+# Initialize empty users dictionary (as required by checker)
+users = {}
 
 
 @app.route('/', methods=['GET'])
@@ -33,8 +20,7 @@ def home():
 @app.route('/data', methods=['GET'])
 def get_data():
     """Return list of all usernames"""
-    usernames = list(users.keys())
-    return jsonify(usernames)
+    return jsonify(list(users.keys()))
 
 
 @app.route('/status', methods=['GET'])
@@ -46,9 +32,8 @@ def get_status():
 @app.route('/users/<username>', methods=['GET'])
 def get_user(username):
     """Get user by username"""
-    user = users.get(username)
-    if user:
-        return jsonify(user)
+    if username in users:
+        return jsonify(users[username])
     else:
         return jsonify({"error": "User not found"}), 404
 
@@ -60,6 +45,9 @@ def add_user():
     if not request.is_json:
         return jsonify({"error": "Invalid JSON"}), 400
     data = request.get_json()
+    # Check if data is None or empty
+    if data is None:
+        return jsonify({"error": "Invalid JSON"}), 400
     # Check if username is provided
     if 'username' not in data:
         return jsonify({"error": "Username is required"}), 400
@@ -67,19 +55,21 @@ def add_user():
     # Check if username already exists
     if username in users:
         return jsonify({"error": "Username already exists"}), 409
-    # Add the new user
-    users[username] = {
+    # Create the new user object
+    new_user = {
         "username": username,
         "name": data.get('name', ''),
         "age": data.get('age', ''),
         "city": data.get('city', '')
     }
+    # Add the new user
+    users[username] = new_user
     # Return success response
     return jsonify({
         "message": "User added",
-        "user": users[username]
+        "user": new_user
     }), 201
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
