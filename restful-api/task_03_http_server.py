@@ -13,12 +13,11 @@ class SimpleAPIHandler(BaseHTTPRequestHandler):
     """
     def do_GET(self):
         """Handle GET requests"""
-        # Set response headers
-        self.send_response(200)
-        self.send_header('Content-type', 'text/html; charset=utf-8')
-        self.end_headers()
         # Route requests based on path
         if self.path == '/':
+            self.send_response(200)
+            self.send_header('Content-type', 'text/html')
+            self.end_headers()
             response = "Hello, this is a simple API!"
             self.wfile.write(response.encode())
         elif self.path == '/data':
@@ -35,23 +34,15 @@ class SimpleAPIHandler(BaseHTTPRequestHandler):
             self.wfile.write(json_data.encode())
         elif self.path == '/status':
             # API status endpoint
+            self.send_response(200)
+            self.send_header('Content-type', 'text/html')
+            self.end_headers()
             response = "OK"
             self.wfile.write(response.encode())
-        elif self.path == '/info':
-            # Additional endpoint from hints
-            data = {
-                "version": "1.0",
-                "description": "A simple API built with http.server"
-            }
-            json_data = json.dumps(data)
-            self.send_response(200)
-            self.send_header('Content-type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json_data.encode())
         else:
-            # Handle undefined endpoints
+            # Handle undefined endpoints - MUST return 404
             self.send_response(404)
-            self.send_header('Content-type', 'text/html; charset=utf-8')
+            self.send_header('Content-type', 'text/html')
             self.end_headers()
             response = "Endpoint not found"
             self.wfile.write(response.encode())
