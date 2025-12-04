@@ -24,7 +24,9 @@ def search_user(letter):
             json_response = response.json()
             # Check if JSON is not empty
             if json_response:
-                print(f"[{json_response.get('id')}] {json_response.get('name')}")
+                       user_id = json_response.get('id')
+                       user_name = json_response.get('name')
+                       print(f"[{user_id}] {user_name}")
             else:
                 print("No result")
         except ValueError:
