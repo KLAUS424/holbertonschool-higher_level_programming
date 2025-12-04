@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-Sends a POST request to http://0.0.0.0:5000/search_user with a letter as a parameter
+Sends a POST request to http://0.0.0.0:5000/search_user
+ with a letter as a parameter
 """
 
 import sys
@@ -9,7 +10,8 @@ import requests
 
 def search_user(letter):
     """
-    Sends a POST request with the letter and processes the JSON response
+    Sends a POST request with the letter and
+           processes the JSON response
     Args:
         letter (str): The letter to search for
     """
