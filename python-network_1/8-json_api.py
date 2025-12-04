@@ -1,44 +1,35 @@
 #!/usr/bin/python3
 """
 Sends a POST request to http://0.0.0.0:5000/search_user
- with a letter as a parameter
+with a letter as a parameter
 """
 
 import sys
 import requests
 
 
-def search_user(letter):
-    """
-    Sends a POST request with the letter and
-           processes the JSON response
-    Args:
-        letter (str): The letter to search for
-    """
+if __name__ == "__main__":
+    # Get the letter from command line or set to empty string
+    q = sys.argv[1] if len(sys.argv) > 1 else ""
+    # Prepare the POST request
     url = "http://0.0.0.0:5000/search_user"
-    data = {"q": letter}
+    payload = {"q": q}
     try:
-        response = requests.post(url, data=data)
-        # Try to parse the response as JSON
+        response = requests.post(url, data=payload)
+        # Try to parse as JSON
         try:
-            json_response = response.json()
-            # Check if JSON is not empty
-            if json_response:
-                       user_id = json_response.get('id')
-                       user_name = json_response.get('name')
-                       print(f"[{user_id}] {user_name}")
+            json_data = response.json()
+            if json_data:
+                # JSON is not empty
+                user_id = json_data.get('id')
+                user_name = json_data.get('name')
+                print(f"[{user_id}] {user_name}")
             else:
+                # JSON is empty
                 print("No result")
         except ValueError:
-            # Response is not valid JSON
+            # Not valid JSON
             print("Not a valid JSON")
-    except requests.RequestException as e:
-        # Handle network errors
-        print(f"Error: {e}")
-
-
-if __name__ == "__main__":
-    # Get the letter from command line arguments
-    letter = sys.argv[1] if len(sys.argv) > 1 else ""
-    # Send the request
-    search_user(letter)
+    except requests.exceptions.RequestException:
+        # Handle connection errors silently
+        pass
