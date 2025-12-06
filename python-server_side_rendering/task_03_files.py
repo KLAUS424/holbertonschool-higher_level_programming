@@ -49,123 +49,14 @@ def create_template():
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Display</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-            background-color: #f5f5f5;
-        }
-        .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #333;
-            border-bottom: 2px solid #4CAF50;
-            padding-bottom: 10px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th {
-            background-color: #4CAF50;
-            color: white;
-            text-align: left;
-            padding: 12px;
-        }
-        td {
-            border: 1px solid #ddd;
-            padding: 12px;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        tr:hover {
-            background-color: #ddd;
-        }
-        .error {
-            color: #d32f2f;
-            background-color: #ffebee;
-            padding: 15px;
-            border-radius: 5px;
-            border-left: 4px solid #d32f2f;
-            margin: 20px 0;
-        }
-        .success {
-            color: #388e3c;
-            background-color: #e8f5e8;
-            padding: 15px;
-            border-radius: 5px;
-            border-left: 4px solid #388e3c;
-            margin: 20px 0;
-        }
-        .info {
-            color: #1976d2;
-            background-color: #e3f2fd;
-            padding: 15px;
-            border-radius: 5px;
-            border-left: 4px solid #1976d2;
-            margin: 20px 0;
-        }
-        .filter-info {
-            margin: 20px 0;
-            padding: 15px;
-            background-color: #e8eaf6;
-            border-radius: 5px;
-        }
-        a {
-            color: #1976d2;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .nav-links {
-            margin: 20px 0;
-        }
-        .nav-links a {
-            margin-right: 15px;
-            padding: 8px 16px;
-            background-color: #4CAF50;
-            color: white;
-            border-radius: 4px;
-        }
-        .nav-links a:hover {
-            background-color: #45a049;
-        }
-    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Product Display</h1>
-        <div class="nav-links">
-            <a href="/products?source=json">View JSON Products</a>
-            <a href="/products?source=csv">View CSV Products</a>
-            <a href="/products?source=json&id=1">JSON Product ID 1</a>
-            <a href="/products?source=csv&id=6">CSV Product ID 6</a>
-            <a href="/products?source=xml">Invalid Source Test</a>
-        </div>
-        {% if error %}
-        <div class="error">
-            <strong>Error:</strong> {{ error }}
-        </div>
-        {% endif %}
-        {% if message %}
-        <div class="info">
-            {{ message }}
-        </div>
-        {% endif %}
-        {% if filter_info %}
-        <div class="filter-info">
-            {{ filter_info }}
-        </div>
-        {% endif %}
-        {% if products %}
-        <table>
+    <h1>Product Display</h1>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    {% if products %}
+        <table border="1">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -185,25 +76,9 @@ def create_template():
                 {% endfor %}
             </tbody>
         </table>
-        <p>Total products: {{ products|length }}</p>
-        {% endif %}
-        {% if not products and not error %}
-        <div class="info">
-            No products to display. Please select a valid data source.
-        </div>
-        {% endif %}
-        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd;">
-            <h3>Test URLs:</h3>
-            <ul>
-                <li><a href="/products?source=json">All JSON products</a></li>
-                <li><a href="/products?source=csv">All CSV products</a></li>
-                <li><a href="/products?source=json&id=3">JSON product ID 3</a></li>
-                <li><a href="/products?source=csv&id=8">CSV product ID 8</a></li>
-                <li><a href="/products?source=json&id=999">Non-existent ID</a></li>
-                <li><a href="/products?source=xml">Invalid source</a></li>
-            </ul>
-        </div>
-    </div>
+    {% elif not error %}
+        <p>No products to display.</p>
+    {% endif %}
 </body>
 </html>'''
     with open('templates/product_display.html', 'w') as f:
@@ -239,50 +114,6 @@ def read_csv_products():
     return products
 
 
-@app.route('/')
-def home():
-    """Home page with instructions"""
-    return '''
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Product Display App</title>
-        <style>
-            body { font-family: Arial, sans-serif; margin: 40px; }
-            .container { max-width: 800px; margin: 0 auto; }
-            h1 { color: #333; }
-            ul { line-height: 1.8; }
-            a { color: #0066cc; }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <h1>Product Display Application</h1>
-            <p>This Flask application demonstrates reading and displaying data from JSON and CSV files.</p>
-            <h2>Available Routes:</h2>
-            <ul>
-                <li><a href="/products?source=json">/products?source=json</a> - Display all JSON products</li>
-                <li><a href="/products?source=csv">/products?source=csv</a> - Display all CSV products</li>
-                <li><a href="/products?source=json&id=1">/products?source=json&id=1</a> - Display JSON product with ID 1</li>
-                <li><a href="/products?source=csv&id=6">/products?source=csv&id=6</a> - Display CSV product with ID 6</li>
-            </ul>
-            <h2>Query Parameters:</h2>
-            <ul>
-                <li><strong>source</strong> (required): 'json' or 'csv'</li>
-                <li><strong>id</strong> (optional): Filter by product ID</li>
-            </ul>
-            <h2>Test Edge Cases:</h2>
-            <ul>
-                <li><a href="/products?source=xml">Invalid source parameter</a></li>
-                <li><a href="/products?source=json&id=999">Non-existent product ID</a></li>
-                <li><a href="/products">Missing source parameter</a></li>
-            </ul>
-        </div>
-    </body>
-    </html>
-    '''
-
-
 @app.route('/products')
 def display_products():
     """Display products from JSON or CSV file with optional filtering"""
@@ -295,7 +126,7 @@ def display_products():
                              error="Missing source parameter. Please specify 'source=json' or 'source=csv'")
     if source not in ['json', 'csv']:
         return render_template('product_display.html',
-                             error=f"Wrong source: '{source}'. Please use 'json' or 'csv'")
+                             error="Wrong source")
     # Read products based on source
     if source == 'json':
         products = read_json_products()
@@ -306,31 +137,35 @@ def display_products():
         return render_template('product_display.html',
                              error=f"No products found in {source.upper()} file")
     # Filter by ID if specified
-    message = ""
-    filter_info = ""
     if product_id:
         try:
             target_id = int(product_id)
             filtered_products = [p for p in products if p['id'] == target_id]
             if filtered_products:
                 products = filtered_products
-                filter_info = f"Filtered by ID: {product_id}"
             else:
-                return render_template('product_display.html', 
-                                     error=f"Product with ID {product_id} not found in {source.upper()} file",
-                                     products=[])
+                return render_template('product_display.html',
+                                     error="Product not found")
         except ValueError:
             return render_template('product_display.html',
                                  error=f"Invalid ID format: '{product_id}'. ID must be a number")
-    # Prepare display message
-    if len(products) == 1:
-        message = f"Displaying 1 product from {source.upper()} file"
-    else:
-        message = f"Displaying {len(products)} products from {source.upper()} file"
-    return render_template('product_display.html',
-                         products=products,
-                         message=message,
-                         filter_info=filter_info)
+    return render_template('product_display.html', products=products)
+
+
+@app.route('/')
+def home():
+    """Simple home page"""
+    return '''
+    <h1>Product Display App</h1>
+    <p>Test URLs:</p>
+    <ul>
+        <li><a href="/products?source=json">/products?source=json</a></li>
+        <li><a href="/products?source=csv">/products?source=csv</a></li>
+        <li><a href="/products?source=json&id=1">/products?source=json&id=1</a></li>
+        <li><a href="/products?source=json&id=999">/products?source=json&id=999</a> (Product not found)</li>
+        <li><a href="/products?source=xml">/products?source=xml</a> (Wrong source)</li>
+    </ul>
+    '''
 
 
 if __name__ == '__main__':
